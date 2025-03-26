@@ -1,0 +1,39 @@
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _SkipFarm and World1 then
+                local shindz = game.Players.LocalPlayer.Data.Level.Value
+                if shindz >= 1 then
+                    _G.Level = false
+                    _SkipFarm = true
+                end
+                if shindz >= 100 then
+                    _G.Level = true
+                    _SkipFarm = false
+                end
+                if shindz >= 1 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Shanda" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            repeat
+                                task.wait()
+                                EquipWeapon(_G.SelectWeapon)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                StartMagnet = true
+                                _G.PosMon = v.HumanoidRootPart.CFrame
+                                TP2(v.HumanoidRootPart.CFrame * Pos)
+                            until not _SkipFarm or not v.Parent or v.Humanoid.Health <= 0
+                            StartMagnet = false
+                            TP1(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
+                        end
+                    end
+                else
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
+                        TP1(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5, 10, 2))
+                    end
+                end
+            end
+        end
+    end)
+end)
