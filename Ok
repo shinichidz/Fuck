@@ -4,10 +4,10 @@ spawn(function()
             if _SkipFarm and World1 then
                 local shindz = game.Players.LocalPlayer.Data.Level.Value
                 if shindz >= 1 then
-                    _G.Level = false
+                    _G.Level = true
                     _SkipFarm = true
                 end
-                if shindz >= 100 then
+                if shindz >= 1 then
                     _G.Level = true
                     _SkipFarm = false
                 end
